@@ -1,4 +1,4 @@
-import Statistics, { FarmZone } from "./spts.js.js.js";
+import Statistics, { FarmZone } from "../index.js";
 
 
 const statistics = Statistics.fromJSON('example.json');
