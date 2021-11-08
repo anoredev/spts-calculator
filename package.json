@@ -1,0 +1,12 @@
+{
+  "type": "module",
+  "name": "spts-calculator",
+  "version": "1.0.0",
+  "description": "JavaScript statistics calculator for SPTS's players.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "anoredev",
+  "license": "ISC"
+}

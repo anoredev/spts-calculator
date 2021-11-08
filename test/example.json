@@ -1,0 +1,14 @@
+{
+    "fs": {
+        "amount": "66.00T",
+        "multiplier": 1024
+    },
+    "body": {
+        "amount": "85.00T",
+        "multiplier": 1024
+    },
+    "psy": {
+        "amount": "580.0T",
+        "multiplier": 2048
+    }
+}
