@@ -4,11 +4,14 @@ import * as fs from 'fs';
 const fistStrengthFarmDelay = 1;
 const bodyToughnessFarmDelay = 1.25;
 const psychicPowerFarmDelay = 1.5;
+const tokensFarmDelay = 60000;
+const defaultTokensMultiplier = 5;
 
 const statNameVariants = {
     fistStrength: [ 'fs', 'fist', 'fist strength', 'fiststrength' ],
     bodyToughness: [ 'health', 'hp', 'bt', 'body', 'body toughness', 'bodytoughness' ],
-    psychicPower: [ 'pp', 'psy', 'psychic', 'psychic power', 'psychicpower' ]
+    psychicPower: [ 'pp', 'psy', 'psychic', 'psychic power', 'psychicpower' ],
+    tokens: [ 'skull', 'skulls', 'tokens', 'tokensamount', 'tokens amount', 'tokenscount', 'tokens count' ]
 };
 
 
@@ -294,12 +297,17 @@ export default class Statistics {
         let data = JSON.parse(fs.readFileSync(path));
         let stats = {};
         for (let statName in data) {
-            stats[defineStat(statName)] = {
-                amount: parseNumber(data[statName].amount || 0),
-                multiplier: data[statName].multiplier || 1
+            let definedStat = defineStat(statName);
+            stats[definedStat] = {
+                amount: parseNumber(data[statName].amount || 0)
             };
+            if (definedStat != 'tokens') {
+                stats[definedStat].multiplier = parseNumber(data[statName].multiplier || 1);
+            } else {
+                stats[definedStat].multiplier = defaultTokensMultiplier;
+            }
         }
-        return new Statistics(stats.fistStrength, stats.bodyToughness, stats.psychicPower);
+        return new Statistics(stats.fistStrength, stats.bodyToughness, stats.psychicPower, stats.tokens);
     }
     
     /**
@@ -307,11 +315,13 @@ export default class Statistics {
      * @param {{ amount: number, multiplier: number }} fistStrength 
      * @param {{ amount: number, multiplier: number }} bodyToughness 
      * @param {{ amount: number, multiplier: number }} psychicPower 
+     * @param {{ amount: number, multiplier: number }} tokens
      */
     constructor(
         fistStrength,
         bodyToughness,
-        psychicPower
+        psychicPower,
+        tokens
     ) {
         this.fistStrength = new Stat(
             'fistStrength',
@@ -330,6 +340,12 @@ export default class Statistics {
             psychicPower.amount,
             psychicPower.multiplier,
             psychicPowerFarmDelay
+        );
+        this.tokens = new Stat(
+            'tokens',
+            tokens.amount,
+            tokens.multiplier,
+            tokensFarmDelay
         );
     }
 
