@@ -4,7 +4,7 @@ import * as fs from 'fs';
 const fistStrengthFarmDelay = 1;
 const bodyToughnessFarmDelay = 1.25;
 const psychicPowerFarmDelay = 1.5;
-const tokensFarmDelay = 60000;
+const tokensFarmDelay = 60;
 const defaultTokensMultiplier = 5;
 
 const statNameVariants = {
