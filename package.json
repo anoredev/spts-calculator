@@ -1,7 +1,7 @@
 {
   "type": "module",
   "name": "spts-calculator",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "JavaScript statistics calculator for SPTS's players.",
   "main": "index.js",
   "scripts": {
