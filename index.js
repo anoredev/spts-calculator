@@ -240,6 +240,17 @@ export class Stat {
     }
 
     /**
+     * Calculates the amount, farmed over a certain period of time 
+     * @param {number | string} time 
+     * @param {boolean} repr Represent the number in simplified form.
+     * @returns number
+     */
+    amount(time, repr=false) {
+        let amount = parseTime(time) * this.aps;
+        return repr ? convertNumber(amount) : amount;
+    }
+
+    /**
      * Calculates the required amount to the target.
      * @param {number | string} nextAmount 
      * @param {boolean} repr Represent the number in simplified form.
@@ -247,17 +258,6 @@ export class Stat {
      */
     amountTo(nextAmount, repr=false) {
         let amount = Math.abs(parseNumber(nextAmount) - this.amount);
-        return repr ? convertNumber(amount) : amount;
-    }
-
-    /**
-     * Calculates the amount, farmed over a certain period of time 
-     * @param {number | string} time 
-     * @param {boolean} repr Represent the number in simplified form.
-     * @returns number
-     */
-    amountPer(time, repr=false) {
-        let amount = parseTime(time) * this.aps;
         return repr ? convertNumber(amount) : amount;
     }
 
@@ -273,14 +273,22 @@ export class Stat {
     }
 
     /**
+     * Calculates the time, required to farm certain amount.
+     * @param {number | string} amount  
+     * @returns string
+     */
+    time(amount, repr=false) {
+        return convertTime(amount / this.aps);
+    }
+
+    /**
      * Calculates the required farm time to the target in seconds.
      * @param {number | string} nextAmount 
-     * @param {number} precise 
      * @returns string
      */
     timeTo(nextAmount) {
         let amountLeft = this.amountTo(parseNumber(nextAmount));
-        return convertTime(amountLeft / this.aps);
+        return this.timePer(amountLeft);
     }
 }
 
