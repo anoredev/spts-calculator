@@ -245,7 +245,7 @@ export class Stat {
      * @param {boolean} repr Represent the number in simplified form.
      * @returns number
      */
-    amount(time, repr=false) {
+    amountPer(time, repr=false) {
         let amount = parseTime(time) * this.aps;
         return repr ? convertNumber(amount) : amount;
     }
