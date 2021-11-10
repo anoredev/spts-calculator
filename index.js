@@ -288,7 +288,7 @@ export class Stat {
      */
     timeTo(nextAmount) {
         let amountLeft = this.amountTo(parseNumber(nextAmount));
-        return this.timePer(amountLeft);
+        return this.time(amountLeft);
     }
 }
 
