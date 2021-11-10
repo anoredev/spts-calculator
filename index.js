@@ -278,7 +278,7 @@ export class Stat {
      * @returns string
      */
     time(amount, repr=false) {
-        return convertTime(amount / this.aps);
+        return convertTime(parseNumber(amount) / this.aps);
     }
 
     /**
